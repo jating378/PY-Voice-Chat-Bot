@@ -29,10 +29,6 @@ def start_wiz():
 
 
 
-
-
-
-
     if use.casefold() in list1:
         print("WIZ - NICE!! , HOW CAN I HELP YOU? ")
     else:
@@ -53,215 +49,37 @@ def start_wiz():
             print("YOU CAN TYPE ANY OF THE CITIES NAMES \n COVENTRY,BIRMINGHAM,LONDON,EDINBURGH,GLASGOW,DUBLIN,BRISTOL,NEWCASTLE UPON TYNE,LEEDS,MANCHESTER,LIVERPOOL")
             print("TYPE (BACK) TO GO BACK TO MAIN PAGE")
 
+            user_input = input("Enter a city name: ")
+
+            city_headlines = get_city_headlines(user_input)
+            if city_headlines:
+                for idx, headline in enumerate(city_headlines):
+                    print(f" {headline}")
+            else:
+                print("City not found.")
+
 
         #I USED CASEFOLD FUNCTION SO THAT EVEN IF USER WRITES THE INPUT IN ANY CASE ,BOT RECOGNIZES THE WORD
         #I USED REQUESTS AND BBEAUTIFULSOUP WHICH WAS VERY HELPFUL TO ME TO SCRAPE TOP TOURIST ATTRACTIONS OF MAIN CITIES OF UK
         #ALL OF THE DATA IS TAKEN FROM (https://www.planetware.com/)
 
 
-        elif userinput.casefold() == "coventry":
-            import requests
-            from bs4 import BeautifulSoup
-
-            url = 'https://www.planetware.com/england/top-rated-things-to-do-in-coventry-eng-1-47.htm'
-            response = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            headlines = soup.find('body').find_all('h2')
-            unwanted = ['More on England']
-
-        # I USED A FOR LOOP SO THAT IT PRINTS THE DATA FROM WEBPAGE AND REMOVE THE UNWANTED DATA
-        #I CHECKED ALL UNWANTED DATA BY RUNNING EACH IN DIFFERENT TERMINAL
-            for x in list(dict.fromkeys(headlines)):
-                if x.text.strip() not in unwanted:
-                    print(x.text.strip())
-            print("TYPE (BACK) TO GO BACK TO MAIN PAGE")
-        elif userinput.casefold() == "birmingham":
-            url = 'https://www.planetware.com/tourist-attractions-/birmingham-eng-wm-brum.htm'
-            response = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            headlines = soup.find('body').find_all('h2')
-            unwanted = ['More on England', 'Where to Stay in Birmingham for Sightseeing',
-                        'More Related Articles on PlanetWare.com']
-            for x in list(dict.fromkeys(headlines)):
-                if x.text.strip() not in unwanted:
-                    print(x.text.strip())
-            print("TYPE (BACK) TO GO BACK TO MAIN PAGE")
-
-
-
-        elif userinput.casefold() == "london":
-            url = 'https://www.planetware.com/tourist-attractions-/london-eng-l-lon.htm'
-            response = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            headlines = soup.find('body').find_all('h2')
-            unwanted = ['Where to Stay in London for Sightseeing',
-                        'Tips and Tours: How to Make the Most of Your Visit to London',
-                        'More Related Articles on PlanetWare.com',
-                        'More on England']
-            for x in list(dict.fromkeys(headlines)):
-                if x.text.strip() not in unwanted:
-                    print(x.text.strip())
-            print("TYPE (BACK) TO GO BACK TO MAIN PAGE")
-
-
-
-        elif userinput.casefold() == "manchester":
-            url = 'https://www.planetware.com/tourist-attractions-/manchester-eng-m-man.htm'
-            response = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            headlines = soup.find('body').find_all('h2')
-            unwanted = ['Where to Stay in Manchester for Sightseeing', 'More on England']
-            for x in list(dict.fromkeys(headlines)):
-                if x.text.strip() not in unwanted:
-                    print(x.text.strip())
-            print("TYPE (BACK) TO GO BACK TO MAIN PAGE")
-
-
-
-        elif userinput.casefold() == "leeds":
-            url = 'https://www.planetware.com/tourist-attractions-/leeds-eng-wy-lee.htm'
-            response = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            headlines = soup.find('body').find_all('h2')
-            unwanted = ['Where to Stay in Leeds for Sightseeing', 'More on England']
-            for x in list(dict.fromkeys(headlines)):
-                if x.text.strip() not in unwanted:
-                    print(x.text.strip())
-            print("TYPE (BACK) TO GO BACK TO MAIN PAGE")
-
-
-
-        elif userinput.casefold() == "liverpool":
-            url = 'https://www.planetware.com/tourist-attractions-/liverpool-eng-mrs-liv.htm'
-            response = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            headlines = soup.find('body').find_all('h2')
-            unwanted = ['Where to Stay in Liverpool for Sightseeing', 'More on England']
-            for x in list(dict.fromkeys(headlines)):
-                if x.text.strip() not in unwanted:
-                    print(x.text.strip())
-            print("TYPE (BACK) TO GO BACK TO MAIN PAGE")
-
-
-
-        elif userinput.casefold() == "glasgow":
-            url = 'https://www.planetware.com/tourist-attractions-/glasgow-sco-stra-glas.htm'
-            response = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            headlines = soup.find('body').find_all('h2')
-            unwanted = ['Where to Stay in Glasgow for Sightseeing', 'More on Scotland',
-                        'More Must-See Attractions near Glasgow']
-            for x in list(dict.fromkeys(headlines)):
-                if x.text.strip() not in unwanted:
-                    print(x.text.strip())
-            print("TYPE (BACK) TO GO BACK TO MAIN PAGE")
-
-
-
-        elif userinput.casefold() == "edinburgh":
-            url = 'https://www.planetware.com/tourist-attractions-/edinburgh-things-to-do-sco-loth-edin.htm'
-            response = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            headlines = soup.find('body').find_all('h2')
-            unwanted = ['Where to Stay in Edinburgh for Sightseeing', 'More on Scotland',
-                        'More Must-See Attractions near Glasgow',
-                        'Tips and Tours: How to Make the Most of Your Visit to Edinburgh',
-                        'Frequently Asked Questions',
-                        'How do you get from Edinburgh Airport to the city center?'
-                , 'What are the best shopping areas in Edinburgh?'
-                , 'What are the must-visit destinations near Edinburgh?']
-            for x in list(dict.fromkeys(headlines)):
-                if x.text.strip() not in unwanted:
-                    print(x.text.strip())
-            print("TYPE (BACK) TO GO BACK TO MAIN PAGE")
-
-
-
-        elif userinput.casefold() == "dublin":
-            url = 'https://www.planetware.com/tourist-attractions-/dublin-irl-db-dub.htm'
-            response = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            headlines = soup.find('body').find_all('h2')
-            unwanted = ['Where to Stay in Edinburgh for Sightseeing', 'More on Ireland',
-                        'More Must-See Attractions near Glasgow',
-                        'Tips and Tours: How to Make the Most of Your Visit to Dublin',
-                        'Frequently Asked Questions', "Editor's Tips", 'More Related Articles on PlanetWare.com',
-                        'Where to Stay in Dublin for Sightseeing']
-            for x in list(dict.fromkeys(headlines)):
-                if x.text.strip() not in unwanted:
-                    print(x.text.strip())
-            print("TYPE (BACK) TO GO BACK TO MAIN PAGE")
-
-
-
-        elif userinput.casefold() == "bristol":
-
-            url = 'https://www.planetware.com/tourist-attractions-/bristol-eng-av-bristol.htm'
-            response = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            headlines = soup.find('body').find_all('h2')
-            unwanted = ['Where to Stay in Edinburgh for Sightseeing', 'More on England',
-                        'More Must-See Attractions near Glasgow',
-                        'Tips and Tours: How to Make the Most of Your Visit to Dublin',
-                        'Frequently Asked Questions', "Editor's Tips", 'More Related Articles on PlanetWare.com',
-                        'Where to Stay in Bristol for Sightseeing']
-            for x in list(dict.fromkeys(headlines)):
-                if x.text.strip() not in unwanted:
-                    print(x.text.strip())
-            print("TYPE (BACK) TO GO BACK TO MAIN PAGE")
-        elif userinput.casefold() == "newcastle upon tyne":
-            url = 'https://www.planetware.com/tourist-attractions-/newcastle-upon-tyne-eng-tw-nut.htm'
-            response = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            headlines = soup.find('body').find_all('h2')
-            unwanted = ['Where to Stay in Edinburgh for Sightseeing', 'More on England',
-                        'More Must-See Attractions near Glasgow',
-                        'Tips and Tours: How to Make the Most of Your Visit to Dublin',
-                        'Frequently Asked Questions', "Editor's Tips", 'More Related Articles on PlanetWare.com',
-                        'Where to Stay in Newcastle upon Tyne for Sightseeing']
-            for x in list(dict.fromkeys(headlines)):
-                if x.text.strip() not in unwanted:
-                    print(x.text.strip())
-            print("TYPE (BACK) TO GO BACK TO MAIN PAGE")
 
     #IN THE CASE OF NEWS ALMOST SAME CODE IS USED AND SPILT FUNCTION IS USED
     #ALL THE DATA IS TAKEN FROM BBC.COM/NEWS
 
         elif "news" in userinput.lower().split() :
-            url = 'https://www.bbc.com/news'
-
-
-            response = requests.get(url)
-
-            soup = BeautifulSoup(response.text, 'html.parser')
-            headlines = soup.find('body').find_all('h3')
-            unwanted = ['BBC World News TV', 'BBC World Service Radio',
-                        'News daily newsletter', 'Mobile app', 'Get in touch', 'BBC News Channel',
-                        'BBC Radio 5 Live']
-
-            for x in list(dict.fromkeys(headlines)):
-                if x.text.strip() not in unwanted:
-                    print(x.text.strip())
+            news_headlines = news()
+            for idx, headline in enumerate(news_headlines, start=1):
+                print(f"{idx}. {headline}")
             print("TYPE (BACK) TO GO BACK TO MAIN PAGE")
 
     #FOR WEATHER I TRIED TO USED API . IT IS A FREE API PROVIDED BY YAHOO AND I GOT TO KNOW ABOUT THIS FROM (RAPIDAPI.COM)
 
         elif "weather" in userinput.lower().split():
             inputof = input("WIZ - TYPE THE NAME OF CITY TO SHOW ITS WEATHER")
-            import requests
+            show_weather_info(inputof)
 
-            url = "https://yahoo-weather5.p.rapidapi.com/weather"
-
-            querystring = {"location": inputof, "format": "json", "u": "f"}
-
-            headers = {
-                "X-RapidAPI-Host": "yahoo-weather5.p.rapidapi.com",
-                "X-RapidAPI-Key": "9fd654d284msh3607ec1ec8113fap1aa355jsnd430c9cd2f34"
-            }
-
-            response = requests.request("GET", url, headers=headers, params=querystring)
-
-            print(response.text)
             print( "(TYPE BACK ) TO GO BACK TO MAIN PAGE")
     #BASIC SPILIT COMMAND USED TO HELP SOMEONE SPLIT THEIR WORDS FROM PARAGRAPH OR LINE.
         elif "split" in userinput.lower().split():
@@ -292,26 +110,11 @@ def start_wiz():
     #USED MATPLOTLIB AND PYPLOT WHICH I LEARNED FROM 4005CEM DATA VISUALISATION IN PYTHON WHICH HELPED ME TO PERFORM THIS CODE
     #I GOT TO KNOW ABOUT THIS CODE FROM https://www.tutorialspoint.com/plot-animated-text-on-the-plot-in-matplotlib
         elif "animate" in userinput.lower().split():
-            from matplotlib import pyplot as plt, animation
 
-            userinput = input("WIZ - TYPE TEXT THAT YOU WANT TO CONVERT TO ANIMATED TEXT")
-            plt.rcParams["figure.figsize"] = [8, 4]
-            plt.rcParams["figure.autolayout"] = True
-            fig, ax = plt.subplots()
-            ax.set(xlim=(-1, 1), ylim=(-1, 1))
-            string = userinput
-            label = ax.text(0, 0, string[0], ha='center', va='center', fontsize=20, color="Red")
+            user_input = input("Enter the text that you want to convert to animated text: ")
+            animate_text(user_input)
+            print("Type (BACK) to go back to the main page.")
 
-
-            def animate(i):
-                label.set_text(string[:i + 1])
-
-
-            anim = animation.FuncAnimation(
-                fig, animate, interval=200, frames=len(string))
-            ax.axis('off')
-            plt.show()
-            print("TYPE (BACK) TO GO BACK TO MAIN PAGE")
     # I USED DATETIME PACKAGE SO THAT IF USER WANTS TO KNOW DATE AND TIME
         elif "date" in userinput.lower().split():
             now = datetime.datetime.now()
@@ -342,3 +145,95 @@ def start_wiz():
             print("WIZ - I AM SORRY , I CAN'T UNDERSTAND WHAT YOU ARE TRYING TO SAY \n PLEASE SEE THE INSTRUCTIONS ABOVE \n  (TYPE BACK ) TO GO BACK TO MAIN PAGE ")
 
 
+
+def news():
+    url = 'https://www.bbc.com/news'
+
+    response = requests.get(url)
+
+    soup = BeautifulSoup(response.text, 'html.parser')
+    headlines = soup.find_all('h3')
+    unwanted = ['BBC World News TV', 'BBC World Service Radio',
+                'News daily newsletter', 'Mobile app', 'Get in touch', 'BBC News Channel',
+                'BBC Radio 5 Live']
+
+    newsheadlines = [x.text.strip() for x in headlines if x.text.strip() not in unwanted]
+
+    return newsheadlines
+
+def get_city_headlines(city_name):
+    city_name_lower = city_name.casefold()
+
+    city_urls = {
+        "coventry": 'https://www.planetware.com/england/top-rated-things-to-do-in-coventry-eng-1-47.htm',
+        "birmingham": 'https://www.planetware.com/tourist-attractions-/birmingham-eng-wm-brum.htm',
+        "london": 'https://www.planetware.com/tourist-attractions-/london-eng-l-lon.htm',
+        "manchester": 'https://www.planetware.com/tourist-attractions-/manchester-eng-m-man.htm',
+        "leeds": 'https://www.planetware.com/tourist-attractions-/leeds-eng-wy-lee.htm',
+        "liverpool": 'https://www.planetware.com/tourist-attractions-/liverpool-eng-mrs-liv.htm',
+        "glasgow": 'https://www.planetware.com/tourist-attractions-/glasgow-sco-stra-glas.htm',
+        "edinburgh": 'https://www.planetware.com/tourist-attractions-/edinburgh-things-to-do-sco-loth-edin.htm',
+        "dublin": 'https://www.planetware.com/tourist-attractions-/dublin-irl-db-dub.htm',
+        "bristol": 'https://www.planetware.com/tourist-attractions-/bristol-eng-av-bristol.htm',
+        "newcastle upon tyne": 'https://www.planetware.com/tourist-attractions-/newcastle-upon-tyne-eng-tw-nut.htm'
+    }
+
+    if city_name_lower not in city_urls:
+        return []  # Return an empty list for unknown city names
+
+    url = city_urls[city_name_lower]
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    headlines = soup.find_all('h2')
+
+    unwanted = ['More on England']
+
+    travel_headlines = [x.text.strip() for x in list(dict.fromkeys(headlines)) if x.text.strip() not in unwanted]
+
+    return travel_headlines
+
+
+
+def get_weather(city_name):
+    url = "https://yahoo-weather5.p.rapidapi.com/weather"
+    headers = {
+        "X-RapidAPI-Host": "yahoo-weather5.p.rapidapi.com",
+        "X-RapidAPI-Key": "9fd654d284msh3607ec1ec8113fap1aa355jsnd430c9cd2f34"
+    }
+
+    querystring = {"location": city_name, "format": "json", "u": "f"}
+
+    try:
+        response = requests.get(url, headers=headers, params=querystring)
+        response.raise_for_status()  # Raise an exception for bad responses (4xx or 5xx)
+        weather_data = response.json()
+        return weather_data
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching weather data: {e}")
+        return None
+
+def show_weather_info(city_name):
+    weather_data = get_weather(city_name)
+
+    if weather_data:
+        # Parse and display relevant weather information
+        temperature = weather_data.get('current_observation', {}).get('condition', {}).get('temperature')
+        condition = weather_data.get('current_observation', {}).get('condition', {}).get('text')
+        print(f"Weather in {city_name}: {temperature}°F, {condition}")
+    else:
+        print("Failed to fetch weather information.")
+
+def animate_text(user_input):
+    plt.rcParams["figure.figsize"] = [8, 4]
+    plt.rcParams["figure.autolayout"] = True
+    fig, ax = plt.subplots()
+    ax.set(xlim=(-1, 1), ylim=(-1, 1))
+    label = ax.text(0, 0, user_input[0], ha='center', va='center', fontsize=20, color="Red")
+
+    def animate(i):
+        label.set_text(user_input[:i + 1])
+
+    anim = animation.FuncAnimation(
+        fig, animate, interval=200, frames=len(user_input))
+    ax.axis('off')
+    plt.show()
